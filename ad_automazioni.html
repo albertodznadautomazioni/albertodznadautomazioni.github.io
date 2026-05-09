@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AD Automazioni | Software e Quadri Elettrici per Automazione Industriale</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #00C8E0;
+            --primary-blue: #1A4BCC;
+            --accent-cyan: #00E5FF;
+            --dark-bg: #060A12;
+            --mid-dark: #0D1420;
+            --light-gray: #E8F4FF;
+            --accent-gray: #7A9BB5;
+            --grid-line: rgba(0, 200, 224, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: var(--dark-bg);
+            color: var(--light-gray);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Grid Background Effect */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* Header */
+        header {
+            position: relative;
+            padding: 2rem 5%;
+            border-bottom: 1px solid rgba(0, 200, 224, 0.3);
+            background: rgba(10, 14, 20, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            position: relative;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 40px;
+            background: var(--primary-red);
+            animation: expandHeight 0.6s ease-out 0.3s backwards;
+        }
+
+        .logo-accent {
+            color: var(--primary-red);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(21, 27, 38, 0.5);
+            border: 1px solid rgba(138, 143, 157, 0.3);
+            border-radius: 4px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--accent-gray);
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .lang-btn:hover {
+            color: var(--light-gray);
+        }
+
+        .lang-btn.active {
+            color: var(--primary-red);
+        }
+
+        .lang-separator {
+            color: rgba(138, 143, 157, 0.3);
+            font-size: 0.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        nav a {
+            color: var(--light-gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-red);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-red);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 5%;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--primary-red);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.3s forwards;
+        }
+
+        .hero h1 {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -2px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.5s forwards;
+        }
+
+        .hero h1 .highlight {
+            color: var(--primary-red);
+            display: inline-block;
+            position: relative;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--accent-gray);
+            max-width: 700px;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.7s forwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-red) 100%);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.9s forwards;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 200, 224, 0.4);
+        }
+
+        /* Decorative Elements */
+        .hero-decoration {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 500px;
+            height: 500px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .circuit-line {
+            position: absolute;
+            background: var(--primary-red);
+            opacity: 0.3;
+        }
+
+        .line-1 {
+            width: 2px;
+            height: 300px;
+            right: 200px;
+            top: 100px;
+            animation: drawLine 2s ease-out 1s backwards;
+        }
+
+        .line-2 {
+            width: 150px;
+            height: 2px;
+            right: 200px;
+            top: 400px;
+            animation: drawLineH 2s ease-out 1.2s backwards;
+        }
+
+        .line-3 {
+            width: 2px;
+            height: 200px;
+            right: 50px;
+            top: 200px;
+            animation: drawLine 2s ease-out 1.4s backwards;
+        }
+
+        /* Services Section */
+        .services {
+            position: relative;
+            padding: 8rem 5%;
+            background: var(--mid-dark);
+            z-index: 10;
+        }
+
+        /* Brands Section */
+        .brands {
+            position: relative;
+            padding: 8rem 5%;
+            background: var(--dark-bg);
+            z-index: 10;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            position: relative;
+            padding: 8rem 5%;
+            background: var(--mid-dark);
+            z-index: 10;
+        }
+
+        .gallery-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .gallery-item {
+            background: rgba(10, 14, 20, 0.5);
+            border: 1px solid rgba(138, 143, 157, 0.2);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 200, 224, 0.2);
+        }
+
+        .gallery-image-placeholder {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, rgba(21, 27, 38, 0.9) 0%, rgba(10, 14, 20, 0.9) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            border-bottom: 2px solid rgba(0, 200, 224, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-image-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(0, 200, 224, 0.05) 40px,
+                    rgba(0, 200, 224, 0.05) 80px
+                );
+        }
+
+        .gallery-item:hover .gallery-image-placeholder {
+            background: linear-gradient(135deg, rgba(21, 27, 38, 1) 0%, rgba(10, 14, 20, 1) 100%);
+        }
+
+        .placeholder-icon {
+            font-size: 4rem;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .gallery-item:hover .placeholder-icon {
+            transform: scale(1.2);
+            opacity: 0.8;
+        }
+
+        .placeholder-text {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gray);
+            opacity: 0.7;
+            z-index: 1;
+        }
+
+        /* Under Construction card */
+        .gallery-item--under-construction {
+            opacity: 0.75;
+            border-style: dashed;
+            border-color: rgba(0, 200, 224, 0.35);
+        }
+
+        .gallery-item--under-construction:hover {
+            opacity: 1;
+            border-style: dashed;
+        }
+
+        .gallery-uc-placeholder {
+            background: repeating-linear-gradient(
+                -45deg,
+                rgba(13, 20, 32, 0.9),
+                rgba(13, 20, 32, 0.9) 18px,
+                rgba(0, 200, 224, 0.04) 18px,
+                rgba(0, 200, 224, 0.04) 36px
+            ) !important;
+            border-bottom: 2px dashed rgba(0, 200, 224, 0.3) !important;
+        }
+
+        .gallery-uc-icon {
+            font-size: 3.5rem;
+            animation: uc-pulse 2.5s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes uc-pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50%       { opacity: 1;   transform: scale(1.08); }
+        }
+
+        .gallery-uc-label {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--primary-red);
+            opacity: 0.8;
+            z-index: 1;
+        }
+
+        .gallery-uc-title {
+            color: var(--accent-gray) !important;
+            font-style: italic;
+        }
+
+        .gallery-uc-desc {
+            font-style: italic;
+            opacity: 0.7;
+        }
+
+        /* For when you add real images, use this class */
+        .gallery-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.05);
+        }
+
+        .gallery-info {
+            padding: 2rem;
+        }
+
+        .gallery-info h3 {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.4rem;
+            color: var(--light-gray);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .gallery-info p {
+            color: var(--accent-gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .gallery-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(0, 200, 224, 0.1);
+            border: 1px solid rgba(0, 200, 224, 0.3);
+            color: var(--primary-red);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .gallery-note {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: rgba(0, 200, 224, 0.1);
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .gallery-note p {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .gallery-note code {
+            background: rgba(10, 14, 20, 0.6);
+            padding: 0.2rem 0.6rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--primary-red);
+        }
+
+        /* Brands Section */
+
+        .brands-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .brand-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: rgba(21, 27, 38, 0.3);
+            border: 1px solid rgba(138, 143, 157, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--primary-red) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .brand-item:hover {
+            background: rgba(21, 27, 38, 0.6);
+            border-color: rgba(0, 200, 224, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .brand-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .brand-logo {
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--light-gray);
+            transition: all 0.3s ease;
+        }
+
+        .brand-item:hover .brand-logo {
+            color: var(--primary-red);
+            transform: scale(1.05);
+        }
+
+        .brand-logo svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .brand-desc {
+            color: var(--accent-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Services Section */
+
+        .services-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--accent-gray);
+            margin-bottom: 5rem;
+            max-width: 600px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: rgba(10, 14, 20, 0.5);
+            border: 1px solid rgba(0, 200, 224, 0.2);
+            padding: 3rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--primary-red);
+            transition: height 0.4s ease;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 200, 224, 0.2);
+        }
+
+        .service-card:hover::before {
+            height: 100%;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--light-gray);
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: var(--accent-gray);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            position: relative;
+            padding: 8rem 5%;
+            background: var(--dark-bg);
+            z-index: 10;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-info h2 {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+        }
+
+        .contact-info p {
+            font-size: 1.2rem;
+            color: var(--accent-gray);
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(21, 27, 38, 0.5);
+            border-left: 3px solid var(--primary-red);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(21, 27, 38, 0.8);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary-red);
+            width: 40px;
+        }
+
+        .contact-item-content h4 {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-gray);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-item-content p {
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            margin: 0;
+        }
+
+        .contact-item-content a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item-content a:hover {
+            color: var(--primary-red);
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            padding: 3rem 5%;
+            background: var(--mid-dark);
+            border-top: 1px solid rgba(0, 200, 224, 0.3);
+            text-align: center;
+            z-index: 10;
+        }
+
+        footer p {
+            color: var(--accent-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes expandHeight {
+            from {
+                height: 0;
+            }
+            to {
+                height: 40px;
+            }
+        }
+
+        @keyframes drawLine {
+            from {
+                height: 0;
+            }
+            to {
+                height: 300px;
+            }
+        }
+
+        @keyframes drawLineH {
+            from {
+                width: 0;
+            }
+            to {
+                width: 150px;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            .hero-decoration {
+                display: none;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .brands-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            header {
+                padding: 1.5rem 5%;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero {
+                min-height: 70vh;
+                padding: 2rem 5%;
+            }
+
+            .services,
+            .contact {
+                padding: 4rem 5%;
+            }
+
+            .brands {
+                padding: 4rem 5%;
+            }
+
+            .gallery {
+                padding: 4rem 5%;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-note {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-accent">AD</span> Automazioni
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" data-i18n="nav.home">Home</a></li>
+                    <li><a href="#servizi" data-i18n="nav.services">Servizi</a></li>
+                    <li><a href="#progetti" data-i18n="nav.projects">Progetti</a></li>
+                    <li><a href="#contatti" data-i18n="nav.contact">Contatti</a></li>
+                </ul>
+                <div class="language-selector">
+                    <button class="lang-btn active" data-lang="it">IT</button>
+                    <span class="lang-separator">|</span>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="circuit-line line-1"></div>
+        <div class="circuit-line line-2"></div>
+        <div class="circuit-line line-3"></div>
+        
+        <div class="hero-content">
+            <span class="hero-tag" data-i18n="hero.tag">Industria 4.0</span>
+            <h1>
+                <span data-i18n="hero.title1">Innovazione in</span><br>
+                <span class="highlight" data-i18n="hero.title2">Automazione</span><br>
+                <span data-i18n="hero.title3">Industriale</span>
+            </h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">
+                Soluzioni software avanzate e quadri elettrici su misura per l'automazione industriale. 
+                Trasformiamo la complessità in efficienza con tecnologie all'avanguardia.
+            </p>
+            <a href="#contatti" class="cta-button" data-i18n="hero.cta">Richiedi Informazioni</a>
+        </div>
+    </section>
+
+    <section id="servizi" class="services">
+        <div class="services-content">
+            <h2 class="section-title"><span data-i18n="services.title1">I Nostri</span> <span style="color: var(--primary-red);" data-i18n="services.title2">Servizi</span></h2>
+            <p class="section-subtitle" data-i18n="services.subtitle">
+                Competenza tecnica e soluzioni personalizzate per ogni esigenza di automazione industriale
+            </p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-icon">⚙️</span>
+                    <h3 data-i18n="services.service1.title">Software Industriale</h3>
+                    <p data-i18n="services.service1.desc">
+                        Sviluppo di software personalizzati per il controllo e la supervisione di impianti industriali. 
+                        SCADA, HMI e sistemi di gestione dati in tempo reale per massimizzare l'efficienza produttiva.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">🔌</span>
+                    <h3 data-i18n="services.service2.title">Quadri Elettrici</h3>
+                    <p data-i18n="services.service2.desc">
+                        Progettazione e realizzazione di quadri elettrici di comando e distribuzione. 
+                        Soluzioni certificate, conformi alle normative, con componenti di qualità superiore.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">🤖</span>
+                    <h3 data-i18n="services.service3.title">Automazione PLC</h3>
+                    <p data-i18n="services.service3.desc">
+                        Programmazione di sistemi PLC per l'automazione di processi industriali. 
+                        Integrazione con sistemi esistenti e ottimizzazione dei cicli produttivi.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">📊</span>
+                    <h3 data-i18n="services.service4.title">Sistemi MES</h3>
+                    <p data-i18n="services.service4.desc">
+                        Implementazione di sistemi Manufacturing Execution System per il monitoraggio 
+                        e l'ottimizzazione della produzione in tempo reale con analisi avanzate.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">🔧</span>
+                    <h3 data-i18n="services.service5.title">Manutenzione</h3>
+                    <p data-i18n="services.service5.desc">
+                        Servizi di assistenza tecnica e manutenzione programmata per garantire 
+                        continuità operativa e massima affidabilità degli impianti.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">🎓</span>
+                    <h3 data-i18n="services.service6.title">Formazione</h3>
+                    <p data-i18n="services.service6.desc">
+                        Corsi di formazione tecnica per operatori e manutentori. 
+                        Trasferimento di competenze per gestire in autonomia i sistemi installati.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="brands">
+        <div class="brands-content">
+            <h2 class="section-title"><span data-i18n="brands.title1">I Nostri Principali</span> <span style="color: var(--primary-red);" data-i18n="brands.title2">Brand</span></h2>
+            <p class="section-subtitle" data-i18n="brands.subtitle">
+                Collaboriamo con i leader mondiali dell'automazione industriale per garantire qualità e affidabilità
+            </p>
+
+            <div class="brands-grid">
+                <div class="brand-item">
+                    <div class="brand-logo">
+                        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="currentColor" font-size="32" font-weight="700" font-family="Arial, sans-serif">SIEMENS</text>
+                        </svg>
+                    </div>
+                    <p class="brand-desc">PLC, HMI e soluzioni di automazione</p>
+                </div>
+
+                <div class="brand-item">
+                    <div class="brand-logo">
+                        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="currentColor" font-size="28" font-weight="700" font-family="Arial, sans-serif">Rockwell</text>
+                            <text x="50%" y="75%" dominant-baseline="middle" text-anchor="middle" fill="currentColor" font-size="18" font-family="Arial, sans-serif">Automation</text>
+                        </svg>
+                    </div>
+                    <p class="brand-desc">Controllo industriale e MES</p>
+                </div>
+
+                <div class="brand-item">
+                    <div class="brand-logo">
+                        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="currentColor" font-size="32" font-weight="700" font-family="Arial, sans-serif">ABB</text>
+                        </svg>
+                    </div>
+                    <p class="brand-desc">Robotica e quadri elettrici</p>
+                </div>
+
+                <div class="brand-item">
+                    <div class="brand-logo">
+                        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="currentColor" font-size="30" font-weight="700" font-family="Arial, sans-serif">Schneider</text>
+                            <text x="50%" y="75%" dominant-baseline="middle" text-anchor="middle" fill="currentColor" font-size="18" font-family="Arial, sans-serif">Electric</text>
+                        </svg>
+                    </div>
+                    <p class="brand-desc">Gestione energia e automazione</p>
+                </div>
+
+                <div class="brand-item">
+                    <div class="brand-logo">
+                        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="currentColor" font-size="32" font-weight="700" font-family="Arial, sans-serif">OMRON</text>
+                        </svg>
+                    </div>
+                    <p class="brand-desc">Sensori e controllo automatico</p>
+                </div>
+
+                <div class="brand-item">
+                    <div class="brand-logo">
+                        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="currentColor" font-size="28" font-weight="700" font-family="Arial, sans-serif">Mitsubishi</text>
+                            <text x="50%" y="75%" dominant-baseline="middle" text-anchor="middle" fill="currentColor" font-size="18" font-family="Arial, sans-serif">Electric</text>
+                        </svg>
+                    </div>
+                    <p class="brand-desc">Automazione e drive</p>
+                </div>
+
+                <div class="brand-item">
+                    <div class="brand-logo">
+                        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="currentColor" font-size="32" font-weight="700" font-family="Arial, sans-serif">FANUC</text>
+                        </svg>
+                    </div>
+                    <p class="brand-desc">CNC e robotica industriale</p>
+                </div>
+
+                <div class="brand-item">
+                    <div class="brand-logo">
+                        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="currentColor" font-size="32" font-weight="700" font-family="Arial, sans-serif">BECKHOFF</text>
+                        </svg>
+                    </div>
+                    <p class="brand-desc">PC-based automation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="progetti" class="gallery">
+        <div class="gallery-content">
+            <h2 class="section-title"><span data-i18n="gallery.title1">I Nostri</span> <span style="color: var(--primary-red);" data-i18n="gallery.title2">Progetti</span></h2>
+            <p class="section-subtitle" data-i18n="gallery.subtitle">
+                Una selezione dei lavori realizzati per i nostri clienti
+            </p>
+
+            <div class="gallery-grid">
+                <!-- Project 1 --
+                <div class="gallery-item">
+                    <div class="gallery-image-placeholder">
+                        <div class="placeholder-icon">🏭</div>
+                        <div class="placeholder-text" data-i18n="gallery.project1.placeholder">Automazione linea produttiva</div>
+                    </div>
+                    <div class="gallery-info">
+                        <h3 data-i18n="gallery.project1.title">Linea Produzione Automotive</h3>
+                        <p data-i18n="gallery.project1.desc">Sistema completo di automazione con PLC Siemens S7-1500 e SCADA WinCC</p>
+                        <span class="gallery-tag" data-i18n="tags.automation">Automazione</span>
+                        <span class="gallery-tag">SCADA</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 --
+                <div class="gallery-item">
+                    <div class="gallery-image-placeholder">
+                        <div class="placeholder-icon">⚡</div>
+                        <div class="placeholder-text" data-i18n="gallery.project2.placeholder">Quadro elettrico industriale</div>
+                    </div>
+                    <div class="gallery-info">
+                        <h3 data-i18n="gallery.project2.title">Quadro Comando Impianto</h3>
+                        <p data-i18n="gallery.project2.desc">Quadro elettrico certificato per gestione impianto di packaging</p>
+                        <span class="gallery-tag" data-i18n="tags.electrical">Quadri Elettrici</span>
+                        <span class="gallery-tag" data-i18n="tags.certification">Certificazione</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 --
+                <div class="gallery-item">
+                    <div class="gallery-image-placeholder">
+                        <div class="placeholder-icon">🤖</div>
+                        <div class="placeholder-text" data-i18n="gallery.project3.placeholder">Sistema robotizzato</div>
+                    </div>
+                    <div class="gallery-info">
+                        <h3 data-i18n="gallery.project3.title">Isola Robotizzata</h3>
+                        <p data-i18n="gallery.project3.desc">Integrazione robot ABB con sistema di visione per assemblaggio</p>
+                        <span class="gallery-tag" data-i18n="tags.robotics">Robotica</span>
+                        <span class="gallery-tag" data-i18n="tags.vision">Visione</span>
+                    </div>
+                </div>
+
+                <!-- Project 4 --
+                <div class="gallery-item">
+                    <div class="gallery-image-placeholder">
+                        <div class="placeholder-icon">📊</div>
+                        <div class="placeholder-text" data-i18n="gallery.project4.placeholder">Sistema MES dashboard</div>
+                    </div>
+                    <div class="gallery-info">
+                        <h3 data-i18n="gallery.project4.title">Sistema MES Produzione</h3>
+                        <p data-i18n="gallery.project4.desc">Implementazione MES per tracciabilità e monitoraggio OEE</p>
+                        <span class="gallery-tag">MES</span>
+                        <span class="gallery-tag" data-i18n="tags.analytics">Analytics</span>
+                    </div>
+                </div>
+
+                <!-- Project 5 --
+                <div class="gallery-item">
+                    <div class="gallery-image-placeholder">
+                        <div class="placeholder-icon">🔧</div>
+                        <div class="placeholder-text" data-i18n="gallery.project5.placeholder">Retrofitting impianto</div>
+                    </div>
+                    <div class="gallery-info">
+                        <h3 data-i18n="gallery.project5.title">Revamping Macchina CNC</h3>
+                        <p data-i18n="gallery.project5.desc">Aggiornamento sistema di controllo su macchina utensile esistente</p>
+                        <span class="gallery-tag" data-i18n="tags.revamping">Revamping</span>
+                        <span class="gallery-tag">CNC</span>
+                    </div>
+                </div>
+
+                <!-- Project 6 --
+                <div class="gallery-item">
+                    <div class="gallery-image-placeholder">
+                        <div class="placeholder-icon">🌐</div>
+                        <div class="placeholder-text" data-i18n="gallery.project6.placeholder">Sistema IoT industriale</div>
+                    </div>
+                    <div class="gallery-info">
+                        <h3 data-i18n="gallery.project6.title">Soluzione IoT Industria 4.0</h3>
+                        <p data-i18n="gallery.project6.desc">Connessione macchine e cloud per monitoraggio remoto predittivo</p>
+                        <span class="gallery-tag">IoT</span>
+                        <span class="gallery-tag">Cloud</span>
+                    </div>
+                </div>-->
+
+                <!--
+                    ============================================================
+                    NUOVO PROGETTO — decommenta questo blocco quando hai
+                    foto e dati reali da mostrare.
+
+                    Come usarlo:
+                    1. Rimuovi i tag  e  che racchiudono questo blocco
+                    2. Sostituisci il <div class="gallery-image-placeholder">
+                       con <img class="gallery-image" src="foto.jpg" alt="...">
+                    3. Aggiorna titolo, descrizione e tag
+                    ============================================================ -->
+
+                <div class="gallery-item gallery-item--under-construction">
+                    <div class="gallery-image-placeholder gallery-uc-placeholder">
+                        <div class="gallery-uc-icon">🚧</div>
+                        <div class="gallery-uc-label">In costruzione</div>
+                    </div>
+                    <!--<div class="gallery-info">
+                        <h3 class="gallery-uc-title">Nuovo Progetto</h3>
+                        <p class="gallery-uc-desc">Descrizione del progetto in arrivo...</p>
+                        <span class="gallery-tag">Tag 1</span>
+                        <span class="gallery-tag">Tag 2</span>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contatti" class="contact">
+        <div class="contact-content">
+            <div class="contact-info">
+                <h2>Parliamo del Tuo <span style="color: var(--primary-red);">Progetto</span></h2>
+                <p>
+                    Siamo pronti ad ascoltare le tue esigenze e proporti la soluzione migliore 
+                    per il tuo impianto di automazione industriale.
+                </p>
+
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-item-content">
+                            <h4>Sede</h4>
+                            <p>Curtarolo (PD), Veneto, Italia</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-item-content">
+                            <h4>Email</h4>
+                            <p><a href="mailto:info@adautomazioni.it">info@adautomazioni.it</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-item-content">
+                            <h4>Telefono</h4>
+                            <p><a href="tel:+393348864759">+39 334 886 4759</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           </div>
+    </section>
+
+    <footer>
+        <p data-i18n="footer.copyright">&copy; 2026 AD Automazioni. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script>
+        // Translation object with all texts
+        const translations = {
+            it: {
+                nav: {
+                    home: "Home",
+                    services: "Servizi",
+                    projects: "Progetti",
+                    contact: "Contatti"
+                },
+                hero: {
+                    tag: "Industria 4.0",
+                    title1: "Innovazione in",
+                    title2: "Automazione",
+                    title3: "Industriale",
+                    subtitle: "Soluzioni software avanzate e quadri elettrici su misura per l'automazione industriale. Trasformiamo la complessità in efficienza con tecnologie all'avanguardia.",
+                    cta: "Richiedi Informazioni"
+                },
+                services: {
+                    title1: "I Nostri",
+                    title2: "Servizi",
+                    subtitle: "Competenza tecnica e soluzioni personalizzate per ogni esigenza di automazione industriale",
+                    service1: {
+                        title: "Software Industriale",
+                        desc: "Sviluppo di software personalizzati per il controllo e la supervisione di impianti industriali. SCADA, HMI e sistemi di gestione dati in tempo reale per massimizzare l'efficienza produttiva."
+                    },
+                    service2: {
+                        title: "Quadri Elettrici",
+                        desc: "Progettazione e realizzazione di quadri elettrici di comando e distribuzione. Soluzioni certificate, conformi alle normative, con componenti di qualità superiore."
+                    },
+                    service3: {
+                        title: "Automazione PLC",
+                        desc: "Programmazione di sistemi PLC per l'automazione di processi industriali. Integrazione con sistemi esistenti e ottimizzazione dei cicli produttivi."
+                    },
+                    service4: {
+                        title: "Sistemi MES",
+                        desc: "Implementazione di sistemi Manufacturing Execution System per il monitoraggio e l'ottimizzazione della produzione in tempo reale con analisi avanzate."
+                    },
+                    service5: {
+                        title: "Manutenzione",
+                        desc: "Servizi di assistenza tecnica e manutenzione programmata per garantire continuità operativa e massima affidabilità degli impianti."
+                    },
+                    service6: {
+                        title: "Formazione",
+                        desc: "Corsi di formazione tecnica per operatori e manutentori. Trasferimento di competenze per gestire in autonomia i sistemi installati."
+                    }
+                },
+                brands: {
+                    title1: "I Nostri Principali",
+                    title2: "Brand",
+                    subtitle: "Collaboriamo con i leader mondiali dell'automazione industriale per garantire qualità e affidabilità"
+                },
+                gallery: {
+                    title1: "I Nostri",
+                    title2: "Progetti",
+                    subtitle: "Una selezione dei lavori realizzati per i nostri clienti",
+                    project1: {
+                        placeholder: "Automazione linea produttiva",
+                        title: "Linea Produzione Automotive",
+                        desc: "Sistema completo di automazione con PLC Siemens S7-1500 e SCADA WinCC"
+                    },
+                    project2: {
+                        placeholder: "Quadro elettrico industriale",
+                        title: "Quadro Comando Impianto",
+                        desc: "Quadro elettrico certificato per gestione impianto di packaging"
+                    },
+                    project3: {
+                        placeholder: "Sistema robotizzato",
+                        title: "Isola Robotizzata",
+                        desc: "Integrazione robot ABB con sistema di visione per assemblaggio"
+                    },
+                    project4: {
+                        placeholder: "Sistema MES dashboard",
+                        title: "Sistema MES Produzione",
+                        desc: "Implementazione MES per tracciabilità e monitoraggio OEE"
+                    },
+                    project5: {
+                        placeholder: "Retrofitting impianto",
+                        title: "Revamping Macchina CNC",
+                        desc: "Aggiornamento sistema di controllo su macchina utensile esistente"
+                    },
+                    project6: {
+                        placeholder: "Sistema IoT industriale",
+                        title: "Soluzione IoT Industria 4.0",
+                        desc: "Connessione macchine e cloud per monitoraggio remoto predittivo"
+                    },
+                    note: '💡 <strong>Come aggiornare la galleria:</strong> Per aggiungere le tue foto, sostituisci i segnaposto <code>gallery-image-placeholder</code> con tag <code>&lt;img src="percorso-tua-foto.jpg" alt="descrizione"&gt;</code>'
+                },
+                tags: {
+                    automation: "Automazione",
+                    electrical: "Quadri Elettrici",
+                    certification: "Certificazione",
+                    robotics: "Robotica",
+                    vision: "Visione",
+                    analytics: "Analytics",
+                    revamping: "Revamping"
+                },
+                contact: {
+                    title1: "Parliamo del Tuo",
+                    title2: "Progetto",
+                    subtitle: "Siamo pronti ad ascoltare le tue esigenze e proporti la soluzione migliore per il tuo impianto di automazione industriale.",
+                    address: {
+                        label: "Sede"
+                    },
+                    phone: {
+                        label: "Telefono"
+                    },
+                    form: {
+                        name: "Nome e Cognome",
+                        phone: "Telefono",
+                        message: "Messaggio",
+                        submit: "Invia Richiesta",
+                        successMessage: "Grazie per il tuo messaggio! Ti contatteremo al più presto."
+                    }
+                },
+                footer: {
+                    copyright: "© 2026 AD Automazioni. Tutti i diritti riservati."
+                }
+            },
+            en: {
+                nav: {
+                    home: "Home",
+                    services: "Services",
+                    projects: "Projects",
+                    contact: "Contact"
+                },
+                hero: {
+                    tag: "Industry 4.0",
+                    title1: "Innovation in",
+                    title2: "Industrial",
+                    title3: "Automation",
+                    subtitle: "Advanced software solutions and custom electrical panels for industrial automation. We transform complexity into efficiency with cutting-edge technologies.",
+                    cta: "Request Information"
+                },
+                services: {
+                    title1: "Our",
+                    title2: "Services",
+                    subtitle: "Technical expertise and customized solutions for every industrial automation need",
+                    service1: {
+                        title: "Industrial Software",
+                        desc: "Development of customized software for control and supervision of industrial plants. SCADA, HMI and real-time data management systems to maximize production efficiency."
+                    },
+                    service2: {
+                        title: "Electrical Panels",
+                        desc: "Design and construction of command and distribution electrical panels. Certified solutions, compliant with regulations, with top-quality components."
+                    },
+                    service3: {
+                        title: "PLC Automation",
+                        desc: "Programming of PLC systems for industrial process automation. Integration with existing systems and optimization of production cycles."
+                    },
+                    service4: {
+                        title: "MES Systems",
+                        desc: "Implementation of Manufacturing Execution Systems for real-time production monitoring and optimization with advanced analytics."
+                    },
+                    service5: {
+                        title: "Maintenance",
+                        desc: "Technical assistance and scheduled maintenance services to ensure operational continuity and maximum plant reliability."
+                    },
+                    service6: {
+                        title: "Training",
+                        desc: "Technical training courses for operators and maintenance personnel. Knowledge transfer to independently manage installed systems."
+                    }
+                },
+                brands: {
+                    title1: "Our Main",
+                    title2: "Brands",
+                    subtitle: "We collaborate with global leaders in industrial automation to ensure quality and reliability"
+                },
+                gallery: {
+                    title1: "Our",
+                    title2: "Projects",
+                    subtitle: "A selection of work completed for our clients",
+                    project1: {
+                        placeholder: "Production line automation",
+                        title: "Automotive Production Line",
+                        desc: "Complete automation system with Siemens S7-1500 PLC and WinCC SCADA"
+                    },
+                    project2: {
+                        placeholder: "Industrial electrical panel",
+                        title: "Plant Control Panel",
+                        desc: "Certified electrical panel for packaging plant management"
+                    },
+                    project3: {
+                        placeholder: "Robotic system",
+                        title: "Robotic Island",
+                        desc: "ABB robot integration with vision system for assembly"
+                    },
+                    project4: {
+                        placeholder: "MES system dashboard",
+                        title: "Production MES System",
+                        desc: "MES implementation for traceability and OEE monitoring"
+                    },
+                    project5: {
+                        placeholder: "Plant retrofitting",
+                        title: "CNC Machine Revamping",
+                        desc: "Control system upgrade on existing machine tool"
+                    },
+                    project6: {
+                        placeholder: "Industrial IoT system",
+                        title: "Industry 4.0 IoT Solution",
+                        desc: "Machine and cloud connection for predictive remote monitoring"
+                    },
+                    note: '💡 <strong>How to update the gallery:</strong> To add your photos, replace the <code>gallery-image-placeholder</code> placeholders with <code>&lt;img src="your-photo-path.jpg" alt="description"&gt;</code> tags'
+                },
+                tags: {
+                    automation: "Automation",
+                    electrical: "Electrical Panels",
+                    certification: "Certification",
+                    robotics: "Robotics",
+                    vision: "Vision",
+                    analytics: "Analytics",
+                    revamping: "Revamping"
+                },
+                contact: {
+                    title1: "Let's Talk About Your",
+                    title2: "Project",
+                    subtitle: "We are ready to listen to your needs and propose the best solution for your industrial automation plant.",
+                    address: {
+                        label: "Location"
+                    },
+                    phone: {
+                        label: "Phone"
+                    },
+                    form: {
+                        name: "Full Name",
+                        phone: "Phone",
+                        message: "Message",
+                        submit: "Send Request",
+                        successMessage: "Thank you for your message! We will contact you soon."
+                    }
+                },
+                footer: {
+                    copyright: "© 2026 AD Automazioni. All rights reserved."
+                }
+            }
+        };
+
+        // Current language (default: Italian)
+        let currentLang = localStorage.getItem('preferredLang') || 'it';
+
+        // Function to update all texts
+        function updateLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('preferredLang', lang);
+
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const keys = key.split('.');
+                let translation = translations[lang];
+                
+                for (let k of keys) {
+                    translation = translation[k];
+                }
+                
+                element.textContent = translation;
+            });
+
+            // Update HTML content for gallery note
+            document.querySelectorAll('[data-i18n-html]').forEach(element => {
+                const key = element.getAttribute('data-i18n-html');
+                const keys = key.split('.');
+                let translation = translations[lang];
+                
+                for (let k of keys) {
+                    translation = translation[k];
+                }
+                
+                element.innerHTML = translation;
+            });
+
+            // Update active language button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Form submit handler
+        function handleFormSubmit() {
+            const message = currentLang === 'it' 
+                ? translations.it.contact.form.successMessage 
+                : translations.en.contact.form.successMessage;
+            alert(message);
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLanguage(currentLang);
+
+            // Add click event to language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.getAttribute('data-lang');
+                    updateLanguage(lang);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
