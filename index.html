@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AD Automazioni | Software e Quadri Elettrici per Automazione Industriale</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -927,7 +929,31 @@
             }
         }
     </style>
-</head>
+    <meta name="description" content="Progettazione software industriale, quadri elettrici e automazione PLC a Curtarolo (PD). Soluzioni su misura per SCADA, MES e Industria 4.0.">
+        <link rel="canonical" href="https://www.adautomazioni.it/">
+        <meta property="og:title" content="AD Automazioni | Software e Quadri Elettrici per Automazione Industriale">
+        <meta property="og:description" content="Progettazione software industriale, quadri elettrici e automazione PLC a Curtarolo (PD).">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.adautomazioni.it/">
+        <meta property="og:locale" content="it_IT">
+
+        <script type="application/ld+json">
+            {
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "AD Automazioni",
+            "founder": "Alberto De Zuani",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Curtarolo",
+                "addressRegion": "PD",
+                "addressCountry": "IT"
+            },
+            "url": "https://www.adautomazioni.it",
+            "areaServed": "Veneto"
+            }
+        </script>
+    </head>
 <body>
     <div class="grid-bg"></div>
 
@@ -1710,27 +1736,6 @@
                 }
             });
         }
-
-        // Form submit handler
-        function handleFormSubmit() {
-            const message = currentLang === 'it' 
-                ? translations.it.contact.form.successMessage 
-                : translations.en.contact.form.successMessage;
-            alert(message);
-        }
-
-        // Initialize language on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            updateLanguage(currentLang);
-
-            // Add click event to language buttons
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const lang = btn.getAttribute('data-lang');
-                    updateLanguage(lang);
-                });
-            });
-        });
     </script>
 </body>
 </html>
