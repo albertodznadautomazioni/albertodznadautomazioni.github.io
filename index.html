@@ -1736,6 +1736,12 @@
                 }
             });
         }
+
+        // Apply translations on initial page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLanguage(currentLang);
+        });
+
     </script>
 </body>
 </html>
