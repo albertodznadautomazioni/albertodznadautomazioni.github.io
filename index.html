@@ -861,6 +861,143 @@
             }
         }
 
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            left: 1.5rem;
+            bottom: 1.5rem;
+            max-width: 480px;
+            width: calc(100% - 3rem);
+            padding: 1.8rem;
+            background: rgba(13, 20, 32, 0.97);
+            border: 1px solid rgba(0, 200, 224, 0.4);
+            border-left: 4px solid var(--primary-red);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transform: translateY(30px);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.4s ease, opacity 0.4s ease, visibility 0.4s;
+        }
+
+        .cookie-banner.show {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cookie-banner h3 {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
+            color: var(--light-gray);
+        }
+
+        .cookie-banner p {
+            font-size: 0.9rem;
+            color: var(--accent-gray);
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+        }
+
+        .cookie-options {
+            display: none;
+            margin-bottom: 1.2rem;
+        }
+
+        .cookie-banner.show-options .cookie-options {
+            display: block;
+        }
+
+        .cookie-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            border-top: 1px solid rgba(138, 143, 157, 0.2);
+        }
+
+        .cookie-option strong {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--light-gray);
+        }
+
+        .cookie-option span {
+            font-size: 0.8rem;
+            color: var(--accent-gray);
+        }
+
+        .cookie-option input {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary-red);
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .cookie-option input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .cookie-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .cookie-btn {
+            flex: 1 1 auto;
+            padding: 0.7rem 1rem;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--light-gray);
+            background: transparent;
+            border: 1px solid rgba(0, 200, 224, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cookie-btn:hover {
+            background: rgba(0, 200, 224, 0.15);
+        }
+
+        .cookie-btn.primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-red) 100%);
+            border-color: transparent;
+            color: white;
+        }
+
+        .cookie-btn.primary:hover {
+            box-shadow: 0 6px 20px rgba(0, 200, 224, 0.4);
+        }
+
+        .cookie-settings-link {
+            background: none;
+            border: none;
+            margin-top: 0.8rem;
+            color: var(--primary-red);
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+            .cookie-banner {
+                left: 0.75rem;
+                bottom: 0.75rem;
+                width: calc(100% - 1.5rem);
+                padding: 1.3rem;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 968px) {
             nav ul {
@@ -1007,11 +1144,11 @@
 
             <div class="services-grid">
                 <div class="service-card">
-                    <span class="service-icon">⚙️</span>
-                    <h3 data-i18n="services.service1.title">Software Industriale</h3>
+                    <span class="service-icon">🤖</span>
+                    <h3 data-i18n="services.service1.title">PLC, HMI e Robot</h3>
                     <p data-i18n="services.service1.desc">
-                        Sviluppo di software personalizzati per il controllo e la supervisione di impianti industriali. 
-                        SCADA, HMI e sistemi di gestione dati in tempo reale per massimizzare l'efficienza produttiva.
+                        Sviluppo del software per il controllo e la supervisione di macchine e impianti industriali:
+                        programmazione di PLC, interfacce HMI e robot. Integrazione con sistemi esistenti e ottimizzazione dei cicli produttivi.
                     </p>
                 </div>
 
@@ -1025,11 +1162,11 @@
                 </div>
 
                 <div class="service-card">
-                    <span class="service-icon">🤖</span>
-                    <h3 data-i18n="services.service3.title">Automazione PLC</h3>
-                    <p data-i18n="services.service3.desc">
-                        Programmazione di sistemi PLC per l'automazione di processi industriali. 
-                        Integrazione con sistemi esistenti e ottimizzazione dei cicli produttivi.
+                    <span class="service-icon">🌐</span>
+                    <h3 data-i18n="services.service7.title">Reti IT</h3>
+                    <p data-i18n="services.service7.desc">
+                        Progettazione e realizzazione di reti IT e industriali: cablaggio strutturato,
+                        switch, router e Wi-Fi, con configurazione, messa in sicurezza e collegamento di macchine e impianti.
                     </p>
                 </div>
 
@@ -1172,6 +1309,15 @@
                         </svg>
                     </div>
                     <p class="brand-desc" data-i18n="brands.brand11.desc"></p>
+                </div>
+
+                <div class="brand-item">
+                    <div class="brand-logo">
+                        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="currentColor" font-size="32" font-weight="700" font-family="Arial, sans-serif" data-i18n="brands.brand12.name"></text>
+                        </svg>
+                    </div>
+                    <p class="brand-desc" data-i18n="brands.brand12.desc"></p>
                 </div>
             </div>
         </div>
@@ -1343,7 +1489,34 @@
 
     <footer>
         <p data-i18n="footer.copyright">&copy; 2026 AD Automazioni. Tutti i diritti riservati.</p>
+        <button type="button" class="cookie-settings-link" id="cookieReopen" data-i18n="cookie.manage">Gestisci cookie</button>
     </footer>
+
+    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-labelledby="cookieTitle">
+        <h3 id="cookieTitle" data-i18n="cookie.title">🍪 Utilizziamo i cookie</h3>
+        <p data-i18n="cookie.text">Questo sito utilizza cookie tecnici necessari al funzionamento e, previo tuo consenso, cookie analitici per migliorare l'esperienza di navigazione. Puoi accettare, rifiutare o scegliere le tue preferenze.</p>
+        <div class="cookie-options">
+            <label class="cookie-option">
+                <div>
+                    <strong data-i18n="cookie.necessary.title">Necessari</strong>
+                    <span data-i18n="cookie.necessary.desc">Indispensabili al funzionamento del sito (es. lingua preferita). Sempre attivi.</span>
+                </div>
+                <input type="checkbox" checked disabled>
+            </label>
+            <label class="cookie-option">
+                <div>
+                    <strong data-i18n="cookie.analytics.title">Analitici</strong>
+                    <span data-i18n="cookie.analytics.desc">Ci aiutano a capire come viene utilizzato il sito, in forma aggregata.</span>
+                </div>
+                <input type="checkbox" id="cookieAnalytics">
+            </label>
+        </div>
+        <div class="cookie-actions">
+            <button type="button" class="cookie-btn" id="cookieReject" data-i18n="cookie.reject">Rifiuta</button>
+            <button type="button" class="cookie-btn" id="cookieCustomize" data-i18n="cookie.customize">Personalizza</button>
+            <button type="button" class="cookie-btn primary" id="cookieAccept" data-i18n="cookie.accept">Accetta tutti</button>
+        </div>
+    </div>
 
     <script>
         // Translation object with all texts
@@ -1368,16 +1541,16 @@
                     title2: "Servizi",
                     subtitle: "Competenza tecnica e soluzioni personalizzate per ogni esigenza di automazione industriale",
                     service1: {
-                        title: "Software Industriale",
-                        desc: "Sviluppo di software personalizzati per il controllo e la supervisione di impianti industriali. SCADA, HMI e sistemi di gestione dati in tempo reale per massimizzare l'efficienza produttiva."
+                        title: "PLC, HMI e Robot",
+                        desc: "Sviluppo del software per il controllo e la supervisione di macchine e impianti industriali: programmazione di PLC, interfacce HMI e robot. Integrazione con sistemi esistenti e ottimizzazione dei cicli produttivi."
                     },
                     service2: {
                         title: "Quadri Elettrici",
                         desc: "Progettazione e realizzazione di quadri elettrici di comando e distribuzione. Soluzioni certificate, conformi alle normative, con componenti di qualità superiore."
                     },
-                    service3: {
-                        title: "Automazione PLC",
-                        desc: "Programmazione di sistemi PLC per l'automazione di processi industriali. Integrazione con sistemi esistenti e ottimizzazione dei cicli produttivi."
+                    service7: {
+                        title: "Reti IT",
+                        desc: "Progettazione e realizzazione di reti IT e industriali: cablaggio strutturato, switch, router e Wi-Fi, con configurazione, messa in sicurezza e collegamento di macchine e impianti."
                     },
                     service4: {
                         title: "Sistemi MES",
@@ -1443,8 +1616,8 @@
                         desc: "Progettazione elettrica e documentazione"
                     },
                     brand12: {
-                        name: "EPLAN",
-                        desc: "Progettazione elettrica e documentazione"
+                        name: "UniFi",
+                        desc: "Reti, switch e Wi-Fi"
                     }
                 },
                 gallery: {
@@ -1516,6 +1689,23 @@
                         successMessage: "Grazie per il tuo messaggio! Ti contatteremo al più presto."
                     }
                 },
+                cookie: {
+                    title: "🍪 Utilizziamo i cookie",
+                    text: "Questo sito utilizza cookie tecnici necessari al funzionamento e, previo tuo consenso, cookie analitici per migliorare l'esperienza di navigazione. Puoi accettare, rifiutare o scegliere le tue preferenze.",
+                    necessary: {
+                        title: "Necessari",
+                        desc: "Indispensabili al funzionamento del sito (es. lingua preferita). Sempre attivi."
+                    },
+                    analytics: {
+                        title: "Analitici",
+                        desc: "Ci aiutano a capire come viene utilizzato il sito, in forma aggregata."
+                    },
+                    reject: "Rifiuta",
+                    customize: "Personalizza",
+                    save: "Salva preferenze",
+                    accept: "Accetta tutti",
+                    manage: "Gestisci cookie"
+                },
                 footer: {
                     copyright: "© 2026 AD Automazioni. Tutti i diritti riservati."
                 }
@@ -1540,16 +1730,16 @@
                     title2: "Services",
                     subtitle: "Technical expertise and customized solutions for every industrial automation need",
                     service1: {
-                        title: "Industrial Software",
-                        desc: "Development of customized software for control and supervision of industrial plants. SCADA, HMI and real-time data management systems to maximize production efficiency."
+                        title: "PLC, HMI and Robot",
+                        desc: "Software development for the control and supervision of industrial machines and plants: PLC, HMI and robot programming. Integration with existing systems and optimization of production cycles."
                     },
                     service2: {
                         title: "Electrical Panels",
                         desc: "Design and construction of command and distribution electrical panels. Certified solutions, compliant with regulations, with top-quality components."
                     },
-                    service3: {
-                        title: "PLC Automation",
-                        desc: "Programming of PLC systems for industrial process automation. Integration with existing systems and optimization of production cycles."
+                    service7: {
+                        title: "IT Networks",
+                        desc: "Design and installation of IT and industrial networks: structured cabling, switches, routers and Wi-Fi, with configuration, security hardening and connection of machines and plants."
                     },
                     service4: {
                         title: "MES Systems",
@@ -1615,8 +1805,8 @@
                         desc: "Electrical design and documentation"
                     },
                     brand12: {
-                        name: "EPLAN",
-                        desc: "Progettazione elettrica e documentazione"
+                        name: "UniFi",
+                        desc: "Networking, switches and Wi-Fi"
                     }
                 },
                 gallery: {
@@ -1688,6 +1878,23 @@
                         successMessage: "Thank you for your message! We will contact you soon."
                     }
                 },
+                cookie: {
+                    title: "🍪 We use cookies",
+                    text: "This website uses technical cookies required for it to work and, with your consent, analytics cookies to improve your browsing experience. You can accept, reject or choose your preferences.",
+                    necessary: {
+                        title: "Necessary",
+                        desc: "Essential for the website to work (e.g. preferred language). Always active."
+                    },
+                    analytics: {
+                        title: "Analytics",
+                        desc: "Help us understand how the website is used, in aggregated form."
+                    },
+                    reject: "Reject",
+                    customize: "Customize",
+                    save: "Save preferences",
+                    accept: "Accept all",
+                    manage: "Manage cookies"
+                },
                 footer: {
                     copyright: "© 2026 AD Automazioni. All rights reserved."
                 }
@@ -1745,8 +1952,71 @@
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     updateLanguage(btn.getAttribute('data-lang'));
+                    updateCookieButtons();
                 });
             });
+        });
+
+        // ---- Cookie consent ----
+        const COOKIE_KEY = 'cookieConsent';
+        const cookieBanner = document.getElementById('cookieBanner');
+        const analyticsBox = document.getElementById('cookieAnalytics');
+        const acceptBtn = document.getElementById('cookieAccept');
+        const customizeBtn = document.getElementById('cookieCustomize');
+
+        function getConsent() {
+            try { return JSON.parse(localStorage.getItem(COOKIE_KEY)); } catch (e) { return null; }
+        }
+
+        // Carica qui gli script opzionali (es. Google Analytics) solo se l'utente ha dato il consenso
+        function applyConsent(consent) {
+            if (consent && consent.analytics) {
+                // Esempio: aggiungere qui il codice di Google Analytics / altri strumenti analitici
+            }
+        }
+
+        function saveConsent(analytics) {
+            const consent = { necessary: true, analytics: analytics, date: new Date().toISOString() };
+            try { localStorage.setItem(COOKIE_KEY, JSON.stringify(consent)); } catch (e) {}
+            cookieBanner.classList.remove('show', 'show-options');
+            applyConsent(consent);
+        }
+
+        // Il pulsante centrale diventa "Salva preferenze" quando le opzioni sono aperte
+        function updateCookieButtons() {
+            const open = cookieBanner.classList.contains('show-options');
+            customizeBtn.textContent = translations[currentLang].cookie[open ? 'save' : 'customize'];
+        }
+
+        function openCookieBanner() {
+            const consent = getConsent();
+            analyticsBox.checked = !!(consent && consent.analytics);
+            cookieBanner.classList.add('show');
+            updateCookieButtons();
+        }
+
+        acceptBtn.addEventListener('click', () => saveConsent(true));
+        document.getElementById('cookieReject').addEventListener('click', () => saveConsent(false));
+        customizeBtn.addEventListener('click', () => {
+            if (cookieBanner.classList.contains('show-options')) {
+                saveConsent(analyticsBox.checked);
+            } else {
+                cookieBanner.classList.add('show-options');
+                updateCookieButtons();
+            }
+        });
+        document.getElementById('cookieReopen').addEventListener('click', () => {
+            cookieBanner.classList.add('show-options');
+            openCookieBanner();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const consent = getConsent();
+            if (consent) {
+                applyConsent(consent);
+            } else {
+                setTimeout(openCookieBanner, 600);
+            }
         });
 
 
